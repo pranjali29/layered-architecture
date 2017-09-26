@@ -1,0 +1,21 @@
+package com.cg.orb.service;
+
+import java.util.ArrayList;
+
+import com.cg.orb.dto.FlatRegistrationDTO;
+
+
+public interface IRoomRegistrationService {
+
+	public int BookRoom(FlatRegistrationDTO dto);
+
+	public ArrayList<Integer> retrieveDetails();
+	
+	public boolean validateAmount(int rentAmount, int paidAmount);
+	
+	public boolean validateRoom_area(int roomArea);
+
+	public boolean validateAmount1(int rentAmount);
+
+	public boolean validateRoom_type(int roomtype);
+}
