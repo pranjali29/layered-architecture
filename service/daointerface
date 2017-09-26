@@ -1,0 +1,12 @@
+package com.cg.orb.dao;
+
+import java.util.ArrayList;
+
+import com.cg.orb.dto.FlatRegistrationDTO;
+
+public interface IRoomRegistrationDAO {
+
+	public int BookRoom(FlatRegistrationDTO fr);
+
+	public ArrayList<Integer> retrieveDetails();
+}
