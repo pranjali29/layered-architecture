@@ -1,0 +1,77 @@
+Connection conn= null;
+	Logger logger = Logger.getRootLogger();
+	public RoomRegistrationDAOImpl()
+	{
+		PropertyConfigurator.configure("log4j.properties");
+	}
+	int result= 0;
+	
+	public int BookRoom(FlatRegistrationDTO fr){
+		
+		try{
+			Connection conn= dbutil.getConnection();
+			String insertQuery= "Insert into Room_Registration values(room_SEQ.nextval,?,?,?,?,?)";
+			PreparedStatement ps= conn.prepareStatement(insertQuery);
+			ps.setInt(1, fr.getOwnerId());
+			ps.setInt(2, fr.getRoomType());
+			ps.setInt(3, fr.getRoomArea());	
+			ps.setInt(4, fr.getRentAmount());
+			ps.setInt(5, fr.getPaidAmount());
+			result = ps.executeUpdate();
+			
+			if(result==1)
+			{
+				String sql= "Select room_seq.currval from dual";
+				PreparedStatement pst= conn.prepareStatement(sql);
+				
+				ResultSet rs=pst.executeQuery();
+				while(rs.next())
+				{
+					logger.info("Executed Successfully");
+					result=rs.getInt(1);
+				}
+			}
+			else
+			{
+				logger.error("Exception Occured");
+				return 0;
+			}
+			return result;
+	}
+		
+		catch(IOException e){
+			 logger.error("Exception Occured");
+			e.printStackTrace();
+		}
+		
+		catch(SQLException e){
+			 logger.error("Exception Occured");
+			e.printStackTrace();
+
+		}
+	return result;
+}
+
+	public ArrayList<Integer> retrieveDetails() {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		try
+		{
+			conn= dbutil.getConnection();
+			String sql = "Select hotel_Id from hotel_owners";
+			Statement st= conn.createStatement();
+			ResultSet rs= st.executeQuery(sql);
+			while(rs.next())
+			{
+				int mid= rs.getInt(1);
+				list.add(new Integer(mid));
+			}
+			logger.info("Executed Successfully");
+		}
+		catch(Exception e)
+		{
+			 logger.error("Exception Occured");
+			System.out.println(e.getMessage());
+		}
+		return list;
+	}
+}
