@@ -1,0 +1,105 @@
+package com.cg.orb.dto;
+
+public class FlatRegistrationDTO {
+
+	private int room_no;
+	private int ownerId;
+	private int roomType;
+	private int roomArea;
+	private int rentAmount;
+	private int paidAmount;
+	
+	public int getRoom_no() {
+		return room_no;
+	}
+
+
+	public void setRoom_no(int room_no) {
+		this.room_no = room_no;
+	}
+
+
+	public int getOwnerId() {
+		return ownerId;
+	}
+
+
+	public void setOwnerId(int ownerId) {
+		this.ownerId = ownerId;
+	}
+
+
+	public int getRoomType() {
+		return roomType;
+	}
+
+
+	public void setRoomType(int roomType) {
+		this.roomType = roomType;
+	}
+
+
+	public int getRoomArea() {
+		return roomArea;
+	}
+
+
+	public void setRoomArea(int roomArea) {
+		this.roomArea = roomArea;
+	}
+
+
+	public int getRentAmount() {
+		return rentAmount;
+	}
+
+
+	public void setRentAmount(int rentAmount) {
+		this.rentAmount = rentAmount;
+	}
+
+
+	public int getPaidAmount() {
+		return paidAmount;
+	}
+
+
+	public void setPaidAmount(int paidAmount) {
+		this.paidAmount = paidAmount;
+	}
+
+
+	public FlatRegistrationDTO(int room_no, int ownerId, int roomType,
+			int roomArea, int rentAmount, int paidAmount) {
+		super();
+		this.room_no = room_no;
+		this.ownerId = ownerId;
+		this.roomType = roomType;
+		this.roomArea = roomArea;
+		this.rentAmount = rentAmount;
+		this.paidAmount = paidAmount;
+	}
+
+
+	public FlatRegistrationDTO() {
+
+	}
+
+
+	public FlatRegistrationDTO(int ownerId, int roomType, int roomArea,
+			int rentAmount, int paidAmount) {
+		super();
+		this.ownerId = ownerId;
+		this.roomType = roomType;
+		this.roomArea = roomArea;
+		this.rentAmount = rentAmount;
+		this.paidAmount = paidAmount;
+	}
+
+
+	
+	
+	
+	
+	
+}
