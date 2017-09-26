@@ -1,0 +1,97 @@
+package com.cg.orb.ui;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import com.cg.orb.dto.FlatRegistrationDTO;
+import com.cg.orb.service.IRoomRegistrationService;
+import com.cg.orb.service.RoomRegistrationServiceImpl;
+
+public class Client {
+	
+	static Scanner sc= new Scanner(System.in);
+	static ArrayList<Integer> list;
+	static IRoomRegistrationService service= new RoomRegistrationServiceImpl();
+	static FlatRegistrationDTO dto = new FlatRegistrationDTO();
+	public static void main(String[] args) {
+		System.out.println("HOTEL BOOKING");
+		System.out.println("******************");
+		while(true)
+		{
+			System.out.println("1. Booking Room");
+			System.out.println("2. Exit");
+			System.out.println("******************");
+			int choice = sc.nextInt();
+			switch(choice)
+			{
+			case 1: BookRoom();
+			break;
+			case 2: System.exit(0);
+			break;
+			}
+		}
+	}
+	
+	private static void BookRoom() 
+	{
+		try
+		{
+		getOwnerDetails();
+		int res;
+		System.out.println("Please enter your hotel owner id from above list: ");
+		int ownerId = sc.nextInt();
+		service= new RoomRegistrationServiceImpl();
+		if(list.contains(ownerId))
+		{
+		System.out.println("Select the room type Type (1-1AC, 2-2NON-AC): "); 
+		int roomtype = sc.nextInt();
+		if(service.validateRoom_type(roomtype))
+		{
+			System.out.println("Enter your room area in sq. ft:");
+			int roomArea = sc.nextInt();
+		if(service.validateRoom_area(roomArea))
+		{
+			System.out.println("Enter desired rent amount: ");
+			int rentAmount = sc.nextInt();
+		if(service.validateAmount1(rentAmount))
+		{
+			System.out.println("Enter desired paid amount ");
+			int paidAmount = sc.nextInt();
+		if(service.validateAmount1( paidAmount))
+		{
+			if(service.validateAmount(rentAmount, paidAmount))
+			{
+		dto = new FlatRegistrationDTO(ownerId,roomtype,roomArea, rentAmount, paidAmount);
+		res= service.BookRoom(dto);
+		if(res>0)
+		{
+			System.out.println("Thank you for room booking. Your room no is:" +" "+res);
+		}
+		else
+		{
+			System.out.println("No rooms booked. ");
+		}
+		}
+		}
+		}
+		}
+		}
+		}
+		}
+		catch(Exception i){
+			
+		}
+	}
+
+	private static void getOwnerDetails() {
+		
+		list = service.retrieveDetails();
+	   System.out.println("Existing Hotel Ids are :"+" "+list);
+		
+		
+	}
+		
+		
+		
+
+}
