@@ -1,0 +1,36 @@
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import com.cg.orb.dao.IRoomRegistrationDAO;
+import com.cg.orb.dao.RoomRegistrationDAOImpl;
+import com.cg.orb.dto.FlatRegistrationDTO;
+
+
+public class Testclass {
+
+	 static	FlatRegistrationDTO bean=null;
+	 static IRoomRegistrationDAO dao = null;
+	 
+	 @BeforeClass
+	 public static void initialize(){
+		 dao = new RoomRegistrationDAOImpl();
+		 bean= new FlatRegistrationDTO();
+	 }
+	 
+	@Test
+	public void test() {
+			 bean.setRoom_no(1040);
+			 bean.setOwnerId(2);
+			 bean.setRoomType(1);
+			 bean.setRoomArea(200);
+			 bean.setPaidAmount(2000);
+			 bean.setRentAmount(3000);
+	}
+	
+	@Test
+	public void testroomDetails()
+	{
+		assertNotNull(dao.BookRoom(bean));
+	}
+
+}
